@@ -29,7 +29,8 @@ def main():
         },
     }
 
-    calendar_id = "primary"  # 或者改成你的共用日曆 ID
+    calendar_id = "e875e7dd28801421793f43bc61291b87e796db8dea7b6b99d97395a9f7e8cfb1@group.calendar.google.com
+"  # 或者改成你的共用日曆 ID
     event_result = service.events().insert(calendarId=calendar_id, body=event).execute()
     print(f"✅ Event created: {event_result.get('htmlLink')}")
 
