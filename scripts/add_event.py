@@ -16,7 +16,7 @@ def main():
 
     # 建立一個範例事件（實際上可從 GitHub event payload 帶入）
     event = {
-        "summary": "Drone Flight Test",
+        "summary": os.environ.get("ISSUE_TITLE", "Drone Flight Test"),
         "location": "ASUS Drone Field",
         "description": "Created automatically from GitHub Actions",
         "start": {
@@ -29,8 +29,7 @@ def main():
         },
     }
 
-    calendar_id = "e875e7dd28801421793f43bc61291b87e796db8dea7b6b99d97395a9f7e8cfb1@group.calendar.google.com
-"  # 或者改成你的共用日曆 ID
+    calendar_id = "e875e7dd28801421793f43bc61291b87e796db8dea7b6b99d97395a9f7e8cfb1@group.calendar.google.com"
     event_result = service.events().insert(calendarId=calendar_id, body=event).execute()
     print(f"✅ Event created: {event_result.get('htmlLink')}")
 
