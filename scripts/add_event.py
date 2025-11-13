@@ -4,6 +4,10 @@ import json
 from datetime import datetime, timedelta
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
+from datetime import datetime, timedelta
+
+now = datetime.utcnow() + timedelta(hours=8)
+print("Event start:", now.isoformat())
 
 def main():
     # 從環境變數中載入 Google 憑證
@@ -32,6 +36,8 @@ def main():
     calendar_id = "e875e7dd28801421793f43bc61291b87e796db8dea7b6b99d97395a9f7e8cfb1@group.calendar.google.com"
     event_result = service.events().insert(calendarId=calendar_id, body=event).execute()
     print(f"✅ Event created: {event_result.get('htmlLink')}")
+    print("Using calendar ID:", calendar_id)
+    print("Event data:", json.dumps(event, indent=2))
 
 if __name__ == "__main__":
     main()
