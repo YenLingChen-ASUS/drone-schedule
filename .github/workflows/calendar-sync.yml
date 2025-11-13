@@ -1,0 +1,27 @@
+name: Add event to Google Calendar
+
+on:
+  issues:
+    types: [opened]  # 觸發條件：新 issue 被建立
+
+jobs:
+  add-calendar-event:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib
+
+      - name: Run add_event.py
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: python scripts/add_event.py
